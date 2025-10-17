@@ -1,47 +1,121 @@
-body { 
-    font-family: sans-serif;     
+* {
+    box-sizing: border-box;
 }
 
-/* 비디오 위에 캔버스가 올바르게 위치하도록 보장 */
+body { 
+    font-family: sans-serif; 
+    font-size: 24px;
+    margin: 0; 
+    background-color: #f0f0f0; 
+    color: #333; 
+}
+
+.container {
+    width: 100%; 
+    padding: 1em;    
+}
+
+header, main, footer {
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.8em; 
+    margin-top: 0; 
+}
+
+button {
+    font-size: 3em;     
+    cursor: pointer;     
+}
+
+.controls, .preview-controls {
+    margin: 1em 0; 
+}
+
 #result-container {
-    position: relative;
-    max-width: 40%; /* 화면 너비를 넘지 않도록 설정 */
+    position: relative; 
+    max-width: 100%; 
+    margin: 0 auto; 
+    border: 1px solid #ccc; 
+    background-color: #000; 
 }
 
 video {
-    display: block;
+    display: block; 
+    width: 100%; 
+    height: auto; 
 }
 
 #canvas {
     position: absolute;
     top: 0;
     left: 0;
-    pointer-events: none;
+    pointer-events: none; 
 }
 
 #legend {
-    display: flex;
+    display: flex; 
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-    padding: 0;
-    list-style: none;
+    justify-content: center; 
+    margin: 1em 0; 
+    padding: 0; 
+    list-style: none; 
 }
 
 .legend-item {
     display: flex;
-    align-items: center;
+    align-items: center; 
     border: 1px solid #ccc;
-    padding: 5px;
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px; 
+    font-size: 0.9em;
 }
 
 .legend-color {
     width: 15px;
     height: 15px;
-    margin-right: 5px;
+    margin-right: 8px;
+    border: 1px solid #ddd;
 }
 
-/* 요소 숨김 처리 */
+#capture-preview-container {
+    margin-top: 2em;
+    margin-bottom: 1em;    
+}
+
 .hidden {
     display: none;
 }
+
+@media (min-width: 768px) {
+    body {
+        font-size: 16px; 
+    }
+
+    .container {
+        max-width: 960px; 
+        margin: 0; 
+        padding: 2em; 
+    }
+
+    button {
+    font-size: 1em;     
+    cursor: pointer;     
+}
+
+    header, main, footer {
+        text-align: left;
+    }
+
+    .controls, #legend, .preview-controls {
+        
+        justify-content: left; 
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+}
+
