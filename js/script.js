@@ -48,6 +48,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// 카메라 시작 함수
+async function startCameraStream(constraints) {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    video.srcObject = stream;
+    await video.play();
+    startCameraBtn.classList.add('hidden');
+    updateStatus('카메라를 로딩 중입니다...');
+}
+
+// '카메라 시작' 버튼 클릭 시 실행
+startCameraBtn.addEventListener('click', async () => {
+    if (!model) {
+        updateStatus('모델이 아직 로드되지 않았습니다. 잠시만 기다려주세요.');
+        return;
+    }
+
+    capturePreviewContainer.classList.add('hidden');
+
+    // iOS Safari 감지 (userAgent로)
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+    try {
+        // iOS에서는 일부 카메라 설정 옵션이 제한되므로 fallback 추가
+        if (isIOS) {
+            // iOS는 'facingMode' 대신 단순 video:true로 먼저 시도
+            await startCameraStream({ video: true });
+        } else {
+            // 안드로이드, PC는 후면 카메라 우선 시도
+            await startCameraStream({ video: { facingMode: 'environment' } });
+        }
+    } catch (err) {
+        console.error("카메라 접근 오류:", err);
+        try {
+            // 최종 백업 시도 (어떤 기기든 가능한 카메라)
+            await startCameraStream({ video: true });
+        } catch (finalErr) {
+            console.error("모든 카메라 접근 오류:", finalErr);
+            updateStatus('카메라에 접근할 수 없습니다. 권한을 확인해주세요.');
+        }
+    }
+});
+
+/*
 // '카메라 시작' 버튼 클릭 시 실행
 startCameraBtn.addEventListener('click', async () => {
 
@@ -79,6 +122,7 @@ startCameraBtn.addEventListener('click', async () => {
          }
     }
 });
+*/
 
 // 비디오 스트림의 메타데이터가 로드되면 실행
 video.addEventListener('loadedmetadata', () => {
