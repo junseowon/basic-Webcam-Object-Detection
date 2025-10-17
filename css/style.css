@@ -1,0 +1,49 @@
+body { 
+    font-family: sans-serif;     
+}
+
+/* 비디오 위에 캔버스가 올바르게 위치하도록 보장 */
+#result-container {
+    position: relative;
+    max-width: 100%; /* 화면 너비를 넘지 않도록 설정 */
+}
+
+video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+#canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+#legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 0;
+    list-style: none;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+/* 요소 숨김 처리 */
+.hidden {
+    display: none;
+}
