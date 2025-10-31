@@ -90,40 +90,6 @@ startCameraBtn.addEventListener('click', async () => {
     }
 });
 
-/*
-// '카메라 시작' 버튼 클릭 시 실행
-startCameraBtn.addEventListener('click', async () => {
-
-    if (!model) {
-        updateStatus('모델이 아직 로드되지 않았습니다. 잠시만 기다려주세요.');
-        return;
-    }
-
-    capturePreviewContainer.classList.add('hidden');
-    
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ 
-            video: { facingMode: 'environment' }
-        });
-        video.srcObject = stream;
-        await video.play();        
-        startCameraBtn.classList.add('hidden');
-        updateStatus('카메라를 로딩 중입니다...');
-    } catch (err) {
-         console.error("카메라 접근 오류:", err);
-         try {
-             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-             video.srcObject = stream;
-             startCameraBtn.classList.add('hidden');
-             updateStatus('카메라를 로딩 중입니다...');
-         } catch (finalErr) {
-             console.error("모든 카메라 접근 오류:", finalErr);
-             updateStatus('카메라에 접근할 수 없습니다. 권한을 확인해주세요.');
-         }
-    }
-});
-*/
-
 // 비디오 스트림의 메타데이터가 로드되면 실행
 video.addEventListener('loadedmetadata', () => {
 
